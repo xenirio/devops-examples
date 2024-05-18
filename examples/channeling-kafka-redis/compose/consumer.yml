@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  currency-rates-redis-consumer:
+    build:
+      context: ../
+    image: telegraf-redis:1.27.1-alpine
+    volumes:
+      - ./config/consumer.conf:/etc/telegraf/telegraf.conf:ro
+      - ./scripts:/etc/scripts
+    networks:
+      - primary
+
+networks:
+  primary:
+    name: primary
+    external: true
